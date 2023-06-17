@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App JS</title>
+
+    <script src="https://kit.fontawesome.com/90bc066b2e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="parent">
+        <div class="Main">
+            <header>
+                <div class="leftHeader">
+                    <h2>Task</h2>
+                    <h3>List</h3>
+                </div>
+                <div class="rightHeader">
+                    <h2 class="addSymbol">
+                        <img src="./add1.jpg" height="30px" width="30px">
+                    </h2>
+                    <h2 class="heading">Add item</h2>
+                </div>
+
+
+            </header>
+            <div class="cardContainer">
+                <h3 class="noItemInToDoList">No of item</h3>
+            </div>
+        </div>
+    </div>
+   <div class="parentBack">
+    <div class="taskPopUp">
+        <h3 class="AddNewTaskPop">Add New Task</h3>
+            <div class="inputAddNewTask">
+                <input type="text" placeholder="enter text" id="taskInput">
+            </div>
+            <div class="addOrCloseButtonPop">
+                <button id ="taskAdd"> ADD</button>
+                <button id ="taskClose"> CLOSE</button>
+            </div>
+
+    </div>
+    <div class="taskPopUp2">
+        <h3 class="AddNewTaskPop2">Add New Task</h3>
+            <div class="inputAddNewTask2">
+                <input type="text" placeholder="enter text" id="taskInput2">
+            </div>
+            <div class="addOrCloseButtonPop2">
+                <button id ="taskAdd2"> ADD</button>
+                <button id ="taskClose2"> CLOSE</button>
+            </div>
+   </div>
+<script src="./main.js"></script>
+</body>
+
+</html>

@@ -1,168 +1,216 @@
-let addNewTaskPopButton = document.getElementsByClassName("rightHeader");
-let parentMain = document.getElementsByClassName("Main");
-let parent = document.getElementsByClassName("parent");
-let body = document.getElementsByTagName("body");
-let header = document.getElementsByTagName("header");
-let taskPopUp = document.getElementsByClassName("taskPopUp");
-let taskPopUp2 = document.getElementsByClassName("taskPopUp2");
-let taskClose = document.getElementById("taskClose");
-let subTaskClose = document.getElementById("taskClose2");
-let addTaskButton = document.getElementById("taskAdd");
-let addSubTaskButton = document.getElementById("taskAdd2");
-let addTaskInput = document.getElementById("taskInput");
-let addSubTaskInput = document.getElementById("taskInput2");
-let headingAddNewTaskPop = document.getElementsByClassName(
-  "AddNewTaskPop"
-);
-let newTaskParent = document.getElementsByClassName("cardContainer");
-let noItemInToDoList = document.getElementsByClassName("noItemInToDoList");
-let subTaskRuning = false;
-// code start
-addNewTaskPopButton[0].addEventListener("click", () => {
-  openTaskPopUp();
-});
-taskClose.addEventListener("click", () => {
-  closeTaskPopUp();
-});
-addTaskButton.addEventListener("click", () => {
-  addNewTask();
-});
-function openTaskPopUp() {
-  parentMain[0].classList.add("parentBlur");
-  taskPopUp[0].setAttribute("style", " display: block");
-  parent[0].setAttribute("style", "background-color: darksalmon");
-  body[0].setAttribute("style", "background-color: darksalmon");
-  console.log("open");
-}
-function closeTaskPopUp() {
-  parentMain[0].setAttribute("style", " display: block");
-  parentMain[0].classList.remove("parentBlur");
-  header[0].setAttribute("style", " display: flex");
-  taskPopUp[0].setAttribute("style", " display: none");
-  parent[0].setAttribute("style", "background-color: (darksalmon)");
-  body[0].setAttribute("style", "background-color: (darksalmon)");
-  console.log("close");
-}
-// Sub task popUp
-function openSubTaskPopUp() {
-  parentMain[0].classList.add("parentBlur");
-  taskPopUp2[0].setAttribute("style", " display: block");
-  parent[0].setAttribute("style", "background-color: mediumpurple");
-  body[0].setAttribute("style", "background-color: mediumpurple");
-  console.log("openSubtask");
-}
-function closeSubTaskPopUp() {
-  parentMain[0].setAttribute("style", " display: block");
-  parentMain[0].classList.remove("parentBlur");
-  header[0].setAttribute("style", " display: flex");
-  taskPopUp2[0].setAttribute("style", " display: none");
-  parent[0].setAttribute("style", "background-color: (darksalmon)");
-  body[0].setAttribute("style", "background-color: (darksalmon)");
-  console.log("closeSubTask");
-}
-let taskCount = 0;
-function addNewTask() {
-  taskCount++;
-  if (taskCount > 0) {
-    noItemInToDoList[0].setAttribute("style", " display: none");
-  } else {
-    noItemInToDoList[0].setAttribute("style", " display: block");
+let icons = document.getElementById("icons")
+let section = document.querySelector("section")
+let todoText=document.getElementById('todoText')
+let header1=document.getElementsByTagName('header')[0]
+let header2=document.getElementsByTagName('header')[1]
+let page2Header= document.getElementById('page2Header')
+let backs=document.getElementsByClassName('backs')[0]
+let header2Add=document.getElementById('header2Add');
+// when we click on header add item
+icons.addEventListener('click', ()=>{
+  addItems("Add your items")
+})
+
+function addItems(heading, parentNode=""){
+
+  console.log(heading)
+//   create node
+let popup=document.createElement('div')
+popup.className="popup"
+let popupHead=document.createElement('div')
+popupHead.id="popupHead"
+popupHead.textContent=heading
+let popupInput=document.createElement('input')
+popupInput.id="popupInput"
+popupInput.type="text"
+popupInput.placeholder=heading
+
+let buttons=document.createElement('div')
+buttons.className="buttons"
+
+let popupAdd=document.createElement('button')
+popupAdd.id="popupAdd"
+popupAdd.textContent="Add"
+
+let popupClose=document.createElement('button')
+popupClose.id="popupClose"
+popupClose.textContent="Close"
+
+// connecting nodes 
+document.body.appendChild(popup)
+popup.appendChild(popupHead)
+popup.appendChild(popupInput)
+popup.appendChild(buttons)
+buttons.appendChild(popupAdd)
+buttons.appendChild(popupClose)
+
+  if(heading === "Add new subitems"){
+    popupAdd.addEventListener("click",() =>{
+      creatingSubTask(popupInput.value, parentNode)
+      closingPopup()
+    })
+    
   }
-  // creating element
-  var taskContainer = document.createElement("div");
-  var taskHeading = document.createElement("div");
-  var hr = document.createElement("hr");
-  var subTaskContainer = document.createElement("div");
-  var removeTaskContainer = document.createElement("div");
-  var removeTaskImage = document.createElement("img");
-  var addSubTaskImage = document.createElement("img");
-  // appending element
-  newTaskParent[0].appendChild(taskContainer);
-  taskContainer.appendChild(taskHeading);
-  taskContainer.appendChild(hr);
-  taskContainer.appendChild(subTaskContainer);
-  taskContainer.appendChild(removeTaskContainer);
-  removeTaskContainer.appendChild(removeTaskImage);
-  removeTaskContainer.appendChild(addSubTaskImage);
-  // styleing element
-  taskContainer.classList.add("taskContainer");
-  taskContainer.classList.add(`id${taskCount}`);
-  var uniqeId = document.getElementsByClassName(`uniqeId${taskCount}`);
-  taskHeading.classList.add("taskHeading");
-  subTaskContainer.classList.add("subTaskContainer");
-  subTaskContainer.classList.add(`uniqeId${taskCount}`);
-  removeTaskContainer.classList.add("removeTaskContainer");
-  removeTaskImage.classList.add("removeTaskImage");
-  addSubTaskImage.classList.add("addSubTaskImage");
-  // subTaskContainer.classList.add("subTaskContainer");
-  taskHeading.innerHTML = addTaskInput.value;
-  removeTaskImage.src = "./removeimg.png";
-  addSubTaskImage.src = "./add.jpg";
-  closeTaskPopUp();
-  // task Datails
-  taskHeading.addEventListener("click", () => {
-    removeTodoTask();
-  });
-  // removeTodoTask
-  removeTaskImage.addEventListener("click", () => {
-    removeTodoTask();
-  });
-  function removeTodoTask() {
-    taskContainer.remove();
+  else if(heading === "Add your items"){
+    popupAdd.addEventListener("click", ()=>{
+      createNewTask(popupInput.value)
+      // to not show the text after the card creation
+      todoText.style.display="none"; 
+      closingPopup()
+      page1();
+    })
   }
-  // AddTodoSubTask
-  addSubTaskImage.addEventListener("click", () => {
-    openSubTaskPopUp();
-  });
-  subTaskClose.addEventListener("click", () => {
-    closeSubTaskPopUp();
-  });
-  addSubTaskButton.addEventListener("click", () => {
-    AddTodoSubTask();
-  });
-  function AddTodoSubTask() {
-    closeSubTaskPopUp();
-    console.log("subTask Created");
-    // createing element
-    var subtaskParent = document.createElement("div");
-    var subTaskTitle = document.createElement("h2");
-    var subTaskMarker = document.createElement("button");
-    var breacktag = document.createElement("br");
-    var breacktag2 = document.createElement("br");
-    // added to parent
-    // subTaskContainer.appendChild(subtaskParent);
-    uniqeId[0].appendChild(subtaskParent);
-    subtaskParent.appendChild(subTaskTitle);
-    subtaskParent.appendChild(subTaskMarker);
-    subTaskContainer.appendChild(breacktag);
-    subTaskContainer.appendChild(breacktag2);
-    // styling element
-    subtaskParent.classList.add("subtaskParent");
-    subTaskTitle.classList.add("subTaskTitle");
-    subTaskMarker.classList.add("subTaskMarker");
-    subTaskTitle.innerHTML = addSubTaskInput.value;
-    subTaskMarker.innerHTML = "Done";
-    // marker codeing
-    let marker = false;
-    subTaskMarker.addEventListener("click", () => {
-      if (marker) {
-        subTaskTitle.classList.remove("marked");
-        console.log("unmarked");
-        marker = false;
-        subTaskMarker.innerHTML = "Done";
-      } else {
-        subTaskTitle.classList.add("marked");
-        console.log("marked");
-        marker = true;
-        subTaskMarker.innerHTML = "UnDone";
-      }
-    });
-  }
-  console.log(uniqeId);
+  //  closing the popup
+  popupClose.addEventListener("click", ()=>{
+    closingPopup()
+  })
+
+//   closing pop up function
+  function closingPopup(){
+    popup.remove()
+    popupInput.value = ""
+    
+    //  remove bg blur
+
+for(let i=0;i<document.body.children.length;i++){
+    document.body.children[i].style.filter="blur(0)"
+
 }
-// hide no item text
-if (taskCount > 0) {
-  noItemInToDoList[0].setAttribute("style", " display: none");
-} else {
-  noItemInToDoList[0].setAttribute("style", " display: block");
+
+  }
+
+//   bg blur
+for(let i=0;i<document.body.children.length;i++){
+    document.body.children[i].style.filter="blur(5px)"
+
+}
+popup.style.filter="blur(0)"
+
+
+}
+
+//     <div class="todoCard">
+//       <div class="cardHead">Heading</div>
+//       <div class="subTaskRow">
+//         <span class="subTask">Sub Task</span>
+//         <span class="markDone">Mark Done</span> 
+//       </div>
+//       </div>
+//     <div class="subTaskButtons">
+//       <button class="trash">Trash</button>
+//       <button class="createSubTask">+</button>
+//     </div>
+
+function createNewTask(cardHeading){
+  // creating nodes
+  let todoCard = document.createElement("div")
+  todoCard.className = "todoCard"
+//   todoCard.classList.add("centerCard")
+
+  let cardHead = document.createElement("div")
+  cardHead.className = "cardHead"
+  cardHead.textContent = cardHeading
+
+  let subTaskButtons = document.createElement("div")
+  subTaskButtons.className = "subTaskButtons"
+
+  let trash = document.createElement("span")
+  trash.textContent = "Delete"
+   trash.className="material-symbols-outlined";//trash-icon
+   trash.id="trash";
+  let createSubTask = document.createElement("button")
+  createSubTask.className = "createSubTask"
+  createSubTask.textContent = "+"
+
+  // connecting Nodes
+
+  section.appendChild(todoCard)
+  todoCard.appendChild(cardHead)
+  todoCard.appendChild(subTaskButtons)
+  subTaskButtons.appendChild(trash)
+  subTaskButtons.appendChild(createSubTask)
+
+  // creating sub tasks
+
+  createSubTask.addEventListener("click", ()=>{
+    addItems("Add new subitems", todoCard)
+  })
+  // deleting the card
+  trash.addEventListener("click", ()=>{
+    todoCard.remove()
+    //This is dispalying the no item elements text when there is no cards
+    if(section.children.length===0){
+        todoText.style.display="block"; 
+    }
+
+  })
+
+  
+// trigger page 2 
+cardHead.addEventListener('click',()=>{
+    page2(todoCard);
+})
+}
+
+// creating subtask function
+
+function creatingSubTask(subTaskDesc, parentNode){
+   // Parent node is nothing but a todoCard of a specific card 
+  // creating nodes
+  let subTaskRow = document.createElement("div")
+  subTaskRow.className = "subTaskRow"
+
+  let subTask = document.createElement("span")
+  subTask.className = "subTask"
+  subTask.textContent = subTaskDesc
+
+  let markDone = document.createElement("button")
+  markDone.className = "markDone"
+  markDone.textContent = "Mark Done"
+
+  // connecting nodes
+  parentNode.appendChild(subTaskRow)
+  subTaskRow.appendChild(subTask)
+  subTaskRow.appendChild(markDone)
+
+   // mark done functionality
+
+   markDone.addEventListener("click",()=>{
+    subTask.classList.add("checkedSubTask")
+    markDone.remove();
+  })
+}
+
+// ------------------page 2 ---------------
+// back btn in page 2
+backs.addEventListener('click',()=>{
+    page1();
+})
+// add btn in page 2
+header2Add.addEventListener('click',()=>{
+    addItems("Add your items");
+ 
+})
+
+
+function page2(parentNode){
+header1.style.display="none"
+header2.style.display="flex"
+parentNode.classList.add("centerCard")
+section.style.visibility="hidden"
+page2Header.textContent=parentNode.children[0].textContent;
+}
+function page1(){
+header1.style.display="flex"
+header2.style.display="none"
+section.style.visibility="visible"
+removeClass();
+}
+
+// checking and removing if any centerCard class in any div
+function removeClass(){
+    for(let i=0;i<section.children.length;i++){
+        section.children[i].classList.remove("centerCard");
+    }
+
 }

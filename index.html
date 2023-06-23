@@ -1,64 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App JS</title>
-
-    <script src="https://kit.fontawesome.com/90bc066b2e.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-
+    <title>Todo App js</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
-    <div class="parent">
-        <div class="Main">
-            <header>
-                <div class="leftHeader">
-                    <h2>Task</h2>
-                    <h3>List</h3>
-                </div>
-                <div class="rightHeader">
-                    <h2 class="addSymbol">
-                        <img src="./add1.jpg" height="30px" width="30px">
-                    </h2>
-                    <h2 class="heading">Add item</h2>
-                </div>
+ <header>
+   
+    <div> <span id="task">Tasks</span>
+      <span id="list">List</span></div>
+    <!-- <input type="text" placeholder="Add new list"> -->
+    
+    <div id="icons"><div class="iconBg"><span  id="plus">+</span> </div> Add item</div>
+ </header>
 
-
-            </header>
-            <div class="cardContainer">
-                <h3 class="noItemInToDoList">No of item</h3>
-            </div>
+ <header class="header2">
+   
+  <div class="backs">
+        <span id="backIcon" class="material-symbols-outlined">
+            arrow_back_ios
+            </span>
+            <div id="back">Back</div>
         </div>
-    </div>
-   <div class="parentBack">
-    <div class="taskPopUp">
-        <h3 class="AddNewTaskPop">Add New Task</h3>
-            <div class="inputAddNewTask">
-                <input type="text" placeholder="enter text" id="taskInput">
-            </div>
-            <div class="addOrCloseButtonPop">
-                <button id ="taskAdd"> ADD</button>
-                <button id ="taskClose"> CLOSE</button>
-            </div>
+    <div id="page2Header"></div>
+    <div id="header2Add" class="iconBg"><span  id="plus">+</span> </div> 
+ </header>
 
-    </div>
-    <div class="taskPopUp2">
-        <h3 class="AddNewTaskPop2">Add New Task</h3>
-            <div class="inputAddNewTask2">
-                <input type="text" placeholder="enter text" id="taskInput2">
-            </div>
-            <div class="addOrCloseButtonPop2">
-                <button id ="taskAdd2"> ADD</button>
-                <button id ="taskClose2"> CLOSE</button>
-            </div>
-   </div>
-<script src="./main.js"></script>
+ <p  id="todoText" class="todoText">No items in the todo list</p>
+ <section></section>
+
+    <script src="./main.js"></script>
 </body>
-
 </html>

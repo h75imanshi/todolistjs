@@ -243,8 +243,8 @@ p{
 .centerCard{
 visibility: visible;
 position: absolute;
-left: 50%;
-top: 50%;
+left: 40%;
+top: 30%;
 transform: translate(-50%,-50%);
 }
 @media (max-width:580px) {
